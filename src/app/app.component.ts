@@ -1,13 +1,18 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'limble';
+  comments: string[] = []; 
+  newComment: string = '';
+
+  setUpdateComment(newValue: string){
+    console.log('new', newValue); 
+    if (newValue.includes('@')){
+      console.log('new tag started'); 
+    }
+  }
 }
