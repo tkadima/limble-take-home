@@ -33,13 +33,45 @@ body {
     list-style-type: none;
     padding: 0;
   }
+
+  .comment__text {
+    position: relative;
+  }
   
   .comment__list li {
     margin-bottom: 5px;
   }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    background-color: #f9f9f9;
+    min-width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .dropdown-content ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .dropdown-content li {
+    padding: 8px 12px;
+    cursor: pointer;
+  }
+  
+  .dropdown-content li:hover {
+    background-color: #ddd;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
   
   textarea {
-    width: 100%;
+    width: 60%;
     height: 100px;
     padding: 10px;
     border: 1px solid #ccc;

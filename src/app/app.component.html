@@ -9,6 +9,19 @@
     </div>
     <div class="comment__new"> 
       <h3>Add New Comment</h3>
-      <textarea class="comment__new-textarea" [(ngModel)]="newComment" (ngModelChange)="setUpdateComment($event)"></textarea> 
+      <div class="dropdown">
+
+      
+      <textarea 
+        name="new-comment" class="comment__new-textarea" 
+        [(ngModel)]="newComment" 
+        (ngModelChange)="setUpdateComment($event)"></textarea> 
+      <div class="dropdown-content">
+        <ul *ngIf="!!topUser">
+          <li *ngFor="let user of users">{{user.name}}</li>
+        </ul>
+      </div>
     </div>
+    </div>
+    <button>Submit</button>
 </div>
