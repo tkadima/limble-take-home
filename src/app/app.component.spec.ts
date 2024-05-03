@@ -49,6 +49,8 @@ describe('AppComponent', () => {
   });
 
   it('should format comment when user is tagged', () => {
+    const taskTags = [{ 'userID': 5, 'name': 'User'}]
+    component.taskTags = taskTags;
     const taggedComment = component.formatComment('Test comment with @User');
     expect(taggedComment).toBe('Test comment with <strong>@User</strong>');
   });

@@ -21,7 +21,8 @@ export class AppComponent {
   newComment: string = '';
   users: User[] = users
   showUserDropdown: boolean = false; 
-  tags: User[] = [];
+  newTags: User[] = [];
+  taskTags: User[] = [{'userID': 0, 'name': 'Daryl Babb'}];
 
   @ViewChild('textarea') textarea!: ElementRef<HTMLTextAreaElement>;
 
@@ -53,7 +54,7 @@ export class AppComponent {
     textarea.value = newText;
     this.newComment = newText;
 
-    this.tags.push(user); 
+    this.newTags.push(user); 
     // reset 
     this.users = users; 
     this.showUserDropdown = false; 
@@ -61,12 +62,21 @@ export class AppComponent {
 
   onSubmit(): void {
     this.comments.push(this.newComment);
-    alert(`Tagged: ${this.tags.map(user => user.name).join(', ')}`)
+    alert(`Tagged: ${this.newTags.map(user => user.name).join(', ')}`)
     this.newComment = '';
-    this.tags = []
+    this.newTags = []
   }
 
-  formatComment(comment: string): string{
-    return comment.replace(/@(\w+)/g, '<strong>@$1</strong>');
-  }
+  formatComment(comment: string): string {
+    const formattedComment = comment.replace(/@([\w\s]+)/g, (match, username) => {
+      const matchedUser = this.taskTags.find(user => user.name.toLowerCase() === username.trim().toLowerCase());
+      if (matchedUser) {
+        return `<strong>@${matchedUser.name}</strong>`;
+      } else {
+        return match;
+      }
+    });
+    return formattedComment;
+  }  
+  
 }
