@@ -3,25 +3,26 @@
     <div class="comments">
       <h2>Comments</h2>
       <ul class="comment__list">
-        <li>This Task was assigned to Daryl Babb</li>
-        <li>Waiting on Parts</li>
+        <li *ngFor="let comment of comments" [innerHTML]="formatComment(comment)">
+          </li>
       </ul>
     </div>
     <div class="comment__new"> 
       <h3>Add New Comment</h3>
       <div class="dropdown">
-
-      
       <textarea 
-        name="new-comment" class="comment__new-textarea" 
+        name="new-comment" 
+        class="comment__new-textarea" 
         [(ngModel)]="newComment" 
-        (ngModelChange)="setUpdateComment($event)"></textarea> 
+        (ngModelChange)="setUpdateComment($event)"
+        #textarea>
+      </textarea> 
       <div class="dropdown-content">
-        <ul *ngIf="!!topUser">
-          <li *ngFor="let user of users">{{user.name}}</li>
+        <ul *ngIf="showUserDropdown">
+          <li *ngFor="let user of users" (click)="onSelect(user)">{{user.name}}</li>
         </ul>
       </div>
     </div>
     </div>
-    <button>Submit</button>
+    <button (click)="onSubmit()">Submit</button>
 </div>
