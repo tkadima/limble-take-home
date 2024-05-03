@@ -3,44 +3,47 @@ body {
     margin: 0;
     padding: 0;
   }
-  
-  .app {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-  }
-  
-  h1 {
-    color: #333;
-  }
-  
-  h2 {
-    color: #666;
-  }
-  
-  h3 {
-    color: #777;
-  }
-  
-  .comments {
+
+  .instructions, .comments, .comment__new {
     margin-bottom: 20px;
   }
   
-  .comment__list {
-    list-style-type: none;
+  .instruction__title, .comment__title {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+ ul {
     padding: 0;
   }
 
-  .comment__text {
+  .comment__list .comment__list-item {
+    border-bottom: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .instruction__checkbox {
+    margin-right: 10px;
+  }
+  
+  .comment__new .dropdown {
     position: relative;
   }
   
-  .comment__list li {
-    margin-bottom: 5px;
+  .button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
   }
+  
+  .button:hover {
+    background-color: #0056b3;
+  }
+
 
   .dropdown-content {
     display: none;
@@ -60,6 +63,7 @@ body {
   .dropdown-content li {
     padding: 8px 12px;
     cursor: pointer;
+    border-bottom: 1px solid #ccc;
   }
   
   .dropdown-content li:hover {
@@ -70,6 +74,7 @@ body {
     display: block;
   }
   
+   
   textarea {
     width: 60%;
     height: 100px;

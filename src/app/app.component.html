@@ -1,14 +1,21 @@
-<div class="app">
-  <h1>Task Page </h1>
+<div class="task">
+    <div class="instructions">
+      <div class="instruction__title">Instructions:</div>
+      <ol>
+        <li>
+          <input type="checkbox" class="instruction__checkbox"/> 
+          <label>Complete work</label>
+        </li>
+      </ol>
+    </div>
     <div class="comments">
-      <h2>Comments</h2>
+      <div class="comment__title">Comments:</div>
       <ul class="comment__list">
-        <li *ngFor="let comment of comments" [innerHTML]="formatComment(comment)">
+        <li class="comment__list-item" *ngFor="let comment of comments" [innerHTML]="formatComment(comment)">
           </li>
       </ul>
     </div>
     <div class="comment__new"> 
-      <h3>Add New Comment</h3>
       <div class="dropdown">
       <textarea 
         name="new-comment" 
@@ -17,12 +24,12 @@
         (ngModelChange)="setUpdateComment($event)"
         #textarea>
       </textarea> 
-      <div class="dropdown-content">
-        <ul *ngIf="showUserDropdown">
+      <div class="dropdown-content" *ngIf="showUserDropdown">
+        <ul >
           <li *ngFor="let user of users" (click)="onSelect(user)">{{user.name}}</li>
         </ul>
       </div>
     </div>
     </div>
-    <button (click)="onSubmit()">Submit</button>
+    <button class="button" (click)="onSubmit()">Submit</button>
 </div>

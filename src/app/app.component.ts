@@ -17,7 +17,7 @@ const users: User[] = [
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  comments: string[] = ['Waiting on Parts']; 
+  comments: string[] = ['This task was assigned to @Daryl Babb', 'Waiting on Parts']; 
   newComment: string = '';
   users: User[] = users
   showUserDropdown: boolean = false; 
@@ -33,10 +33,15 @@ export class AppComponent {
       const tagged = newValue.slice(tagIndex + 1); 
       this.users = this.getMatchingUsers(tagged);
     }
+    if (!newValue.includes('@')) {
+      this.showUserDropdown = false; 
+    }
+
+
   }
 
   getMatchingUsers(taggedUser: string): User[] {
-    return users.filter(user => user.name.includes(taggedUser)); 
+    return users.filter(user => user.name.toLowerCase().includes(taggedUser.toLowerCase())); 
   }
 
   onSelect(user:User): void {
