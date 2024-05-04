@@ -1,4 +1,5 @@
 <div class="task">
+    <h3>Task </h3>
     <div class="instructions">
       <div class="instruction__title">Instructions:</div>
       <ol>
@@ -18,6 +19,7 @@
     <div class="comment__new"> 
       <div class="dropdown">
       <textarea 
+      placeholder="Make a new comment"
         name="new-comment" 
         class="comment__new-textarea" 
         [(ngModel)]="newComment" 
@@ -32,4 +34,4 @@
     </div>
     </div>
     <button class="button" (click)="onSubmit()">Submit</button>
-</div>
+  </div>

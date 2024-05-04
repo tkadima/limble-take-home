@@ -73,10 +73,12 @@ export class AppComponent {
   
   
   onSubmit(): void {
+    if (this.newComment !== "") {
     this.comments.push(this.newComment);
     alert(`Tagged: ${this.newTags.map(user => user.name).join(', ')}`)
     this.newComment = '';
     this.newTags = []
+    }
   }
 
   formatComment(comment: string): string {
