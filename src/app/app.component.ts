@@ -75,6 +75,7 @@ export class AppComponent {
   onSubmit(): void {
     if (this.newComment !== "") {
     this.comments.push(this.newComment);
+    this.taskTags.push(...this.newTags);
     alert(`Tagged: ${this.newTags.map(user => user.name).join(', ')}`)
     this.newComment = '';
     this.newTags = []
