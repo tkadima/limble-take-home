@@ -11,6 +11,7 @@ const users: User[] = [
   {'userID' : 3, 'name' : 'Bryan'},
   {'userID' : 4, 'name' : 'Gabbey'},
 ]; 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -37,29 +38,40 @@ export class AppComponent {
     if (!newValue.includes('@')) {
       this.showUserDropdown = false; 
     }
-
-
   }
 
   getMatchingUsers(taggedUser: string): User[] {
     return users.filter(user => user.name.toLowerCase().includes(taggedUser.toLowerCase())); 
   }
 
-  onSelect(user:User): void {
+  onSelect(taggedUser: User): void {
     const textarea = this.textarea.nativeElement;
     const currentText = textarea.value;
     const cursorPosition = textarea.selectionStart;
-    // todo fix so it completes when user already types some
-    const newText = currentText.slice(0, cursorPosition) + user.name + currentText.slice(cursorPosition);
+    
+    let lastAtSymbolIndex = currentText.lastIndexOf('@', cursorPosition - 1);
+  
+    if (lastAtSymbolIndex === -1) {
+      lastAtSymbolIndex = 0;
+    } else {
+      lastAtSymbolIndex++;
+    }
+  
+    const textBeforeAtSymbol = currentText.substring(0, lastAtSymbolIndex);
+    const textAfterAtSymbol = currentText.substring(cursorPosition);
+  
+    const newText = `${textBeforeAtSymbol}${taggedUser.name}${textAfterAtSymbol}`;
     textarea.value = newText;
     this.newComment = newText;
-
-    this.newTags.push(user); 
+  
+    this.newTags.push(taggedUser);
+  
     // reset 
-    this.users = users; 
-    this.showUserDropdown = false; 
+    this.users = users;
+    this.showUserDropdown = false;
   }
-
+  
+  
   onSubmit(): void {
     this.comments.push(this.newComment);
     alert(`Tagged: ${this.newTags.map(user => user.name).join(', ')}`)
