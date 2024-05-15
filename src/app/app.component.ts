@@ -28,12 +28,17 @@ export class AppComponent {
   @ViewChild('textarea') textarea!: ElementRef<HTMLTextAreaElement>;
 
   setUpdateComment(newValue: string){
-    this.newComment = newValue; 
-    if (newValue.includes('@')) {
+    const textarea = this.textarea.nativeElement;
+    const currentText = textarea.value;
+    const cursorPosition = textarea.selectionStart;
+    
+    this.newComment = currentText; 
+    if (currentText.includes('@')) {
       this.showUserDropdown = true;
       const tagIndex = newValue.lastIndexOf('@'); 
-      const tagged = newValue.slice(tagIndex + 1); 
+      const tagged = newValue.slice(tagIndex + 1, cursorPosition); 
       this.users = this.getMatchingUsers(tagged);
+      if (this.users.length === 0)  this.showUserDropdown = false; 
     }
     if (!newValue.includes('@')) {
       this.showUserDropdown = false; 
@@ -76,6 +81,7 @@ export class AppComponent {
     if (this.newComment !== "") {
     this.comments.push(this.newComment);
     this.taskTags.push(...this.newTags);
+    console.log('new Tasks', this.newTags); 
     alert(`Tagged: ${this.newTags.map(user => user.name).join(', ')}`)
     this.newComment = '';
     this.newTags = []
@@ -83,15 +89,13 @@ export class AppComponent {
   }
 
   formatComment(comment: string): string {
-    const formattedComment = comment.replace(/@([\w\s]+)/g, (match, username) => {
-      const matchedUser = this.taskTags.find(user => user.name.toLowerCase() === username.trim().toLowerCase());
-      if (matchedUser) {
-        return `<strong>@${matchedUser.name}</strong>`;
-      } else {
-        return match;
-      }
+    let formattedComment = comment;
+    this.taskTags.forEach(user => {
+      const regex = new RegExp(`@${user.name}`, 'gi');
+      formattedComment = formattedComment.replace(regex, `<strong>@${user.name}</strong>`);
     });
     return formattedComment;
-  }  
+  }
+  
   
 }
