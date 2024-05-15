@@ -33,14 +33,14 @@ export class AppComponent {
     const cursorPosition = textarea.selectionStart;
     
     this.newComment = currentText; 
-    if (currentText.includes('@')) {
+    if (newValue.includes('@')) {
       this.showUserDropdown = true;
       const tagIndex = newValue.lastIndexOf('@'); 
       const tagged = newValue.slice(tagIndex + 1, cursorPosition); 
       this.users = this.getMatchingUsers(tagged);
       if (this.users.length === 0)  this.showUserDropdown = false; 
     }
-    if (!newValue.includes('@')) {
+    else  {
       this.showUserDropdown = false; 
     }
   }
@@ -71,7 +71,6 @@ export class AppComponent {
   
     this.newTags.push(taggedUser);
   
-    // reset 
     this.users = users;
     this.showUserDropdown = false;
   }
