@@ -29,10 +29,8 @@ export class AppComponent {
 
   setUpdateComment(newValue: string){
     const textarea = this.textarea.nativeElement;
-    const currentText = textarea.value;
     const cursorPosition = textarea.selectionStart;
     
-    this.newComment = currentText; 
     if (newValue.includes('@')) {
       const tagIndex = newValue.lastIndexOf('@'); 
       const tagged = newValue.slice(tagIndex + 1, cursorPosition); 
