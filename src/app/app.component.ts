@@ -34,16 +34,19 @@ export class AppComponent {
     
     this.newComment = currentText; 
     if (newValue.includes('@')) {
-      this.showUserDropdown = true;
       const tagIndex = newValue.lastIndexOf('@'); 
       const tagged = newValue.slice(tagIndex + 1, cursorPosition); 
-      this.users = this.getMatchingUsers(tagged);
-      if (this.users.length === 0)  this.showUserDropdown = false; 
-    }
-    else  {
+      if (tagIndex === 0 || /[^\w\d_.-]/.test(newValue[tagIndex - 1])) {
+        this.users = this.getMatchingUsers(tagged);
+        this.showUserDropdown = this.users.length > 0; 
+      } else {
+        this.showUserDropdown = false; 
+      }
+    } else {
       this.showUserDropdown = false; 
     }
   }
+  
 
   getMatchingUsers(taggedUser: string): User[] {
     return users.filter(user => user.name.toLowerCase().includes(taggedUser.toLowerCase())); 
